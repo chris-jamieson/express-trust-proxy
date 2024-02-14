@@ -72,3 +72,15 @@ Set an invalid IP with different formats:
 curl -H "X-Forwarded-For: 999.999.999.999" http://example.com
 curl -H "X-Forwarded-For: 123.456.789" http://example.com
 ```
+
+## Heroku
+
+Following experiments with Heroku, it appears that the following allow the server to correctly get the request's client IP but prevent spoofing using request headers:
+
+```js
+app.set("trust proxy", 1);
+```
+
+```js
+app.set("trust proxy", "uniquelocal");
+```
